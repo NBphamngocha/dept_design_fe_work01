@@ -29,7 +29,7 @@ VSCodeで`dept_design_fe_work01`ディレクトリを開いて、Dev Containers�
 - `dept_design_fe_work01`という名称で個人リポジトリを作成して、成果物はそこにアップロードしてください。
 - Step毎に作業用ブランチを切って作業を行なってください。
 - issueは[nb_study_react](https://github.com/newbeescoltd/nb_study_react)で作成し、各個人リポジトリのプルリクエストからissueにリンクする。
-- 作業用ブランチをマージ次第、issueをクローズする。 
+- 作業用ブランチをマージ次第、issueをクローズする。
 
 ## 各ステップの説明
 1. モックデータを使用して、任意の1冊の情報を表示する。
