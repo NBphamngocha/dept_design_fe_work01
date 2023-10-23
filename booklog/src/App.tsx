@@ -1,33 +1,32 @@
 import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { BookItem } from './types'
+import { MOCK_DATA } from './mockdata'
+import styles from './index.module.css'
 
-function App() {
-  const [count, setCount] = useState(0)
+
+const App = () => {
+  const [bookData, setBookData] = useState(MOCK_DATA.items)
+  const [book, setBook] = useState<BookItem>(bookData[0])
+  const { id, volumeInfo } = book;
+  const { title, authors, description, publisher, imageLinks, previewLink } = volumeInfo
+  const handleBookLink = () => {
+    window.open(`${previewLink}`, '_blank');
+  }
 
   return (
     <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+      <main className={styles.boxWrap}>
+        <picture className={styles.boxPicture}>
+          <img src={imageLinks?.thumbnail} alt="React.js&Next.js超入門第2版" />
+        </picture>
+        <div className={styles.boxInfo}>
+          <h2 className={styles.boxTitle}>{title}</h2>
+          <p className={styles.boxDescription}>{description}</p>
+          <p>著者:<span>{authors}</span></p>
+          <p>出版社:<span>{publisher}</span></p>
+          <button className={styles.boxButton} onClick={handleBookLink}>詳しく見る</button>
+        </div>
+      </main >
     </>
   )
 }
