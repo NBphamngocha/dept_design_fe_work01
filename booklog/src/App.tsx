@@ -30,7 +30,7 @@ const App = () => {
             publisher && <p>出版社: <span>{publisher}</span></p>
           }
           {
-            previewLink && <button className={styles.boxButton}><a href={previewLink} target="_blank">詳しく見る</a></button>
+            previewLink && <p className={styles.boxButton}><a href={previewLink} target="_blank">詳しく見る</a></p>
           }
         </div>
       </main >

@@ -67,19 +67,23 @@ a {
   margin-top: 10px
 }
 
-.boxButton {
+
+.boxButton a {
   display: inline-block;
   padding: 3px 10px;
+  opacity: 1;
   border-radius: 5px;
   font-size: 14px;
   text-align: center;
-  outline: none;
   cursor: pointer;
   color: #fff;
   border: 3px solid #38cbd0;
   background: #38cbd0
 }
 
+.boxButton a:hover {
+  opacity: .7;
+}
 
 .boxWrap {
   display: flex;
