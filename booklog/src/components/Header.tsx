@@ -1,7 +1,7 @@
 import React from 'react'
 import styles from '../App.module.css'
 
-const Header = () => {
+const Header = (): JSX.Element => {
     return (
         <header className={styles.boxHeader}>
             <h1 className={styles.boxHeaderTitle}>Booklog</h1>

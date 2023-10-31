@@ -5,9 +5,8 @@ import styles from './App.module.css'
 import Header from './components/Header'
 import Book from './components/Book'
 
-const App: React.FC = () => {
+const App = (): JSX.Element => {
   const [books, setBooks] = useState<BookItem[]>(MOCK_DATA.items)
-  // const { title, authors, description, publisher, imageLinks, previewLink } = books[0].volumeInfo
 
   return (
     <>
@@ -16,7 +15,9 @@ const App: React.FC = () => {
         <ul className={styles.conBook}>
           {books.map((book) => {
             return (
-              <Book bookInfo={book.volumeInfo} />
+              <li className={styles.boxBook}>
+                <Book bookInfo={book.volumeInfo} />
+              </li>
             )
           })}
         </ul>
