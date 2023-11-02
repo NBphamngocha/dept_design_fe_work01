@@ -21,7 +21,7 @@
   -webkit-line-clamp: 2;
 }
 
-a.boxButton {
+.boxButton {
   display: inline-block;
   padding: 3px 10px;
   margin-top: 10px;
