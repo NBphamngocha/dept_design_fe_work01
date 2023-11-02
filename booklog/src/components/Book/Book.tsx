@@ -1,12 +1,12 @@
 import { useState } from 'react'
-import type { BookItem } from '../types'
-import styles from '../App.module.css'
+import type { BookItem } from '../../types'
+import styles from './Book.module.css'
 
 type Props = {
   bookInfo: BookItem["volumeInfo"]
 }
 
-const Book = ({ bookInfo }: Props): JSX.Element => {
+export const Book = ({ bookInfo }: Props): JSX.Element => {
   const { title, authors, description, publisher, imageLinks, previewLink } = bookInfo
   return (
     <>
@@ -35,6 +35,5 @@ const Book = ({ bookInfo }: Props): JSX.Element => {
   )
 }
 
-export default Book
 
 

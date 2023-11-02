@@ -1,12 +1,10 @@
 import React from 'react'
-import styles from '../App.module.css'
+import styles from './Header.module.css'
 
-const Header = (): JSX.Element => {
+export const Header = (): JSX.Element => {
     return (
         <header className={styles.boxHeader}>
             <h1 className={styles.boxHeaderTitle}>Booklog</h1>
         </header>
     )
 }
-
-export default Header

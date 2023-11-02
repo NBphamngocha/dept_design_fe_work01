@@ -1,0 +1,40 @@
+.boxPicture {
+  width: 128px;
+  padding: 6px;
+  aspect-ratio: 1 / 1;
+  flex-shrink: 0;
+}
+.boxInfo {
+  width: 100%;
+  padding: 14px 18px;
+}
+
+.boxBookTitle {
+  margin-bottom: 0.6em;
+}
+
+.boxDescription {
+  margin-bottom: 0.4em;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+}
+
+a.boxButton {
+  display: inline-block;
+  padding: 3px 10px;
+  margin-top: 10px;
+  opacity: 1;
+  border-radius: 5px;
+  font-size: 14px;
+  text-align: center;
+  cursor: pointer;
+  color: #fff;
+  border: 3px solid #38cbd0;
+  background: #38cbd0;
+}
+
+.boxButton:hover {
+  opacity: 0.7;
+}
