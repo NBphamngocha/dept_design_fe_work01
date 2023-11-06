@@ -36,15 +36,14 @@ a {
   display: flex;
   flex-direction: column;
   width: 75%;
-  height: 100vh;
-  height: 100dvh;
   margin: auto;
   padding: 62px 3% 0;
-  overflow: scroll;
+  height: 100vh;
 }
 
 .boxWrap .conBook {
   width: 100%;
+  overflow: scroll;
   margin: 0 auto;
 }
 

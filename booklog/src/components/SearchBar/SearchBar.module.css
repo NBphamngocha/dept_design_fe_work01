@@ -1,0 +1,26 @@
+.boxSearchBar {
+  width: 48%;
+  display: flex;
+  margin: auto;
+  padding: 25px 20px;
+}
+.boxInput {
+  width: 100%;
+  border: 3px solid #38cbd0;
+  border-right: none;
+  padding: 5px;
+  border-radius: 5px 0 0 5px;
+  outline: none;
+  color: #170c45;
+  background: #fefeff;
+}
+.boxButton {
+  padding: 5px 8px;
+  border: 1px solid #38cbd0;
+  background: #38cbd0;
+  text-align: center;
+  color: #fff;
+  border-radius: 0 5px 5px 0;
+  cursor: pointer;
+  font-size: 16px;
+}
