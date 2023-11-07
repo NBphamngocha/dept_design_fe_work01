@@ -18,7 +18,9 @@ export const SearchBar = (): JSX.Element => {
           className={styles.boxButton}
           onClick={(e) => {
             e.preventDefault();
-            alert(`${inputRef.current} で検索しました。`);
+            inputRef.current
+              ? alert(`${inputRef.current} で検索しました。`)
+              : alert("キーワードを入力してください！");
           }}
         >
           Search
