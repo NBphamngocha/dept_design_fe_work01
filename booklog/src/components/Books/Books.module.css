@@ -1,3 +1,18 @@
+.conBook {
+  width: 100%;
+  overflow: scroll;
+  margin: 0 auto;
+}
+
+.boxBook {
+  padding: 10px 0;
+  border-bottom: 1px solid #cbc5d6;
+  display: flex;
+  align-items: flex-start;
+  color: #170c45;
+  background: #fefeff;
+}
+
 .boxPicture {
   width: 128px;
   padding: 6px;
