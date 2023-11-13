@@ -2,7 +2,7 @@ import { useState } from "react";
 import type { BookItem } from "./types";
 import { MOCK_DATA } from "./mockdata";
 import { Header } from "./components/Header/Header";
-import { Books } from "./components/Books/Books ";
+import { Books } from "./components/Books/Books";
 import { SearchBar } from "./components/SearchBar/SearchBar";
 import styles from "./App.module.css";
 

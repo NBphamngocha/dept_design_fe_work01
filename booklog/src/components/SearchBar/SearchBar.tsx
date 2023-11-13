@@ -3,7 +3,7 @@ import styles from "./SearchBar.module.css";
 
 export const SearchBar = (): JSX.Element => {
   const searchQuery = useRef<string>("");
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
+  const handleOnChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
     searchQuery.current = e.target.value;
   };
   const handleOnClick = (e: React.MouseEvent<HTMLButtonElement>): void => {
@@ -19,7 +19,7 @@ export const SearchBar = (): JSX.Element => {
           type="text"
           className={styles.boxInput}
           placeholder="キーワードを入力して書籍を検索"
-          onChange={handleChange}
+          onChange={handleOnChange}
         />
         <button
           type="submit"
