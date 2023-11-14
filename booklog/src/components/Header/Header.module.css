@@ -16,3 +16,36 @@
   font-size: 1.6em;
   color: #170c45;
 }
+
+.boxHeader .boxTimer {
+  display: flex;
+  align-items: center;
+}
+
+.boxTimer .boxControl {
+  display: flex;
+}
+
+.boxControl .boxSelect {
+  width: 100%;
+  margin-left: 10px;
+  padding: 5px;
+  border: 3px solid #38cbd0;
+  border-right: none;
+  border-radius: 5px 0 0 5px;
+  outline: none;
+  color: #170c45;
+  background: #fefeff;
+  cursor: pointer;
+}
+
+.boxControl .btnControl {
+  padding: 5px 8px;
+  border: 1px solid #38cbd0;
+  background: #38cbd0;
+  text-align: center;
+  color: #fff;
+  border-radius: 0 5px 5px 0;
+  cursor: pointer;
+  font-size: 16px;
+}

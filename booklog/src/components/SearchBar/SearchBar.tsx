@@ -3,10 +3,10 @@ import styles from "./SearchBar.module.css";
 
 export const SearchBar = (): JSX.Element => {
   const searchQuery = useRef<string>("");
-  const handleOnChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
     searchQuery.current = e.target.value;
   };
-  const handleOnClick = (e: React.MouseEvent<HTMLButtonElement>): void => {
+  const handleClick = (e: React.MouseEvent<HTMLButtonElement>): void => {
     e.preventDefault();
     searchQuery.current
       ? alert(`${searchQuery.current} で検索しました。`)
@@ -19,12 +19,12 @@ export const SearchBar = (): JSX.Element => {
           type="text"
           className={styles.boxInput}
           placeholder="キーワードを入力して書籍を検索"
-          onChange={handleOnChange}
+          onChange={handleChange}
         />
         <button
           type="submit"
           className={styles.boxButton}
-          onClick={handleOnClick}
+          onClick={handleClick}
         >
           Search
         </button>
