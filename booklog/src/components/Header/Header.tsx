@@ -1,27 +1,32 @@
 import { useState, useEffect, useRef } from "react";
 import styles from "./Header.module.css";
 
-export const Header = (): JSX.Element => {
-  type TIMES = {
-    hour: number;
-    min: number;
-    sec: number;
-  };
+type TIMES = {
+  hour: number;
+  min: number;
+  sec: number;
+};
 
-  const [timer, setTimer] = useState<TIMES>({ hour: 0, min: 0, sec: 0 });
+export const Header = (): JSX.Element => {
+  const [hour, setHour] = useState<TIMES["hour"]>(0);
+  const [min, setMin] = useState<TIMES["min"]>(0);
+  const [sec, setSec] = useState<TIMES["sec"]>(0);
   const targetTime = useRef<number>(0);
-  const textHour = String(timer.hour).padStart(2, "0");
-  const textMin = String(timer.min).padStart(2, "0");
-  const textSec = String(timer.sec).padStart(2, "0");
+
+  //テキストに変更
+  const textHour = String(hour).padStart(2, "0");
+  const textMin = String(min).padStart(2, "0");
+  const textSec = String(sec).padStart(2, "0");
 
   useEffect(() => {
     const interval = setInterval(() => {
-      if (timer.sec > 0) {
-        setTimer({ ...timer, sec: (timer.sec -= 1) });
+      if (sec > 0) {
+        setSec((sec) => (sec -= 1));
       }
     }, 1000);
     return () => clearInterval(interval);
-  }, [timer]);
+  }, [sec]);
+
   return (
     <header className={styles.boxHeader}>
       <h1 className={styles.boxHeaderTitle}>Booklog</h1>
@@ -43,7 +48,7 @@ export const Header = (): JSX.Element => {
           <button
             className={styles.btnControl}
             onClick={() => {
-              setTimer({ ...timer, sec: targetTime.current });
+              setSec(targetTime.current);
             }}
           >
             Start
