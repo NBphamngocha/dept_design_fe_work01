@@ -22,6 +22,11 @@
   align-items: center;
 }
 
+.boxHeader .boxTimer .boxTextTimer.red {
+  color: red;
+  font-weight: 600;
+}
+
 .boxTimer .boxControl {
   display: flex;
 }

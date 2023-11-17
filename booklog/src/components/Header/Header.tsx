@@ -1,46 +1,49 @@
 import { useState, useEffect, useRef } from "react";
 import styles from "./Header.module.css";
 
-type TIMES = {
-  hour: number;
-  min: number;
-  sec: number;
-};
-
 export const Header = (): JSX.Element => {
-  const [hour, setHour] = useState<TIMES["hour"]>(0);
-  const [min, setMin] = useState<TIMES["min"]>(0);
-  const [sec, setSec] = useState<TIMES["sec"]>(0);
-  const targetTime = useRef<number>(0);
+  const [timer, setTimer] = useState<number>(0);
+  const [isStop, setIsStop] = useState<boolean>(false);
+  const ref = useRef<HTMLSelectElement>(null);
 
   //テキストに変更
-  const textHour = String(hour).padStart(2, "0");
-  const textMin = String(min).padStart(2, "0");
-  const textSec = String(sec).padStart(2, "0");
+  const textTimer: string = String(timer).padStart(2, "0");
 
   useEffect(() => {
+    //intervalのセットアップ
     const interval = setInterval(() => {
-      if (sec > 0) {
-        setSec((sec) => (sec -= 1));
+      if (timer > 0) {
+        setTimer((timer) => (timer -= 1));
       }
     }, 1000);
-    return () => clearInterval(interval);
-  }, [sec]);
+    const t = timer * 1000;
+
+    //Time outのセットアップ
+    const timeOut = setTimeout(() => {
+      if (timer > 0) {
+        setIsStop(true);
+      }
+    }, t);
+
+    return () => {
+      //intervalのクリアアップ
+      clearInterval(interval);
+      //Time outのクリアアップ
+      clearTimeout(timeOut);
+    };
+  }, [timer]);
 
   return (
     <header className={styles.boxHeader}>
       <h1 className={styles.boxHeaderTitle}>Booklog</h1>
       <div className={styles.boxTimer}>
-        <p className={styles.boxTextTimer}>
-          読書タイマー {textHour}:{textMin}:{textSec}
+        <p className={`${styles.boxTextTimer} ${isStop && styles.red}`}>
+          読書タイマー {isStop ? "終了" : `残り ${textTimer}秒`}
         </p>
+
         <div className={styles.boxControl}>
-          <select
-            className={styles.boxSelect}
-            onChange={(e: React.ChangeEvent<HTMLSelectElement>) => {
-              targetTime.current = parseInt(e.target.value);
-            }}
-          >
+          <select className={styles.boxSelect} ref={ref}>
+            <option value=""></option>
             <option value="5">5秒</option>
             <option value="10">10秒</option>
             <option value="15">15秒</option>
@@ -48,10 +51,13 @@ export const Header = (): JSX.Element => {
           <button
             className={styles.btnControl}
             onClick={() => {
-              setSec(targetTime.current);
+              if (ref.current?.value !== undefined) {
+                setTimer(parseInt(ref.current?.value));
+                setIsStop(false);
+              }
             }}
           >
-            Start
+            start
           </button>
         </div>
       </div>
