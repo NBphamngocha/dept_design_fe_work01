@@ -9,6 +9,15 @@ export const Header = (): JSX.Element => {
   //テキストに変更
   const textTimer: string = String(timer).padStart(2, "0");
 
+  function handleSetTimer() {
+    if (ref.current?.value !== undefined) {
+      if (ref.current.value) {
+        setTimer(parseInt(ref.current.value));
+        setIsStop(false);
+      }
+    }
+  }
+
   useEffect(() => {
     //intervalのセットアップ
     const interval = setInterval(() => {
@@ -43,20 +52,11 @@ export const Header = (): JSX.Element => {
 
         <div className={styles.boxControl}>
           <select className={styles.boxSelect} ref={ref}>
-            <option value=""></option>
             <option value="5">5秒</option>
             <option value="10">10秒</option>
             <option value="15">15秒</option>
           </select>
-          <button
-            className={styles.btnControl}
-            onClick={() => {
-              if (ref.current?.value !== undefined) {
-                setTimer(parseInt(ref.current?.value));
-                setIsStop(false);
-              }
-            }}
-          >
+          <button className={styles.btnControl} onClick={handleSetTimer}>
             start
           </button>
         </div>
