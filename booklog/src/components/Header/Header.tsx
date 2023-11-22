@@ -9,36 +9,27 @@ export const Header = (): JSX.Element => {
   //テキストに変更
   const textTimer: string = String(timer).padStart(2, "0");
 
-  function handleSetTimer() {
-    if (ref.current?.value !== undefined) {
-      if (ref.current.value) {
-        setTimer(parseInt(ref.current.value));
-        setIsStop(false);
-      }
+  function handleStartTimer(): void {
+    if (ref.current?.value !== undefined && ref.current.value) {
+      setTimer(parseInt(ref.current.value));
+      setIsStop(false);
     }
   }
 
   useEffect(() => {
     //intervalのセットアップ
     const interval = setInterval(() => {
-      if (timer > 0) {
-        setTimer((timer) => (timer -= 1));
+      clearInterval(interval);
+      if (timer > 1) {
+        setTimer((timer) => timer - 1);
       }
-    }, 1000);
-    const t = timer * 1000;
-
-    //Time outのセットアップ
-    const timeOut = setTimeout(() => {
-      if (timer > 0) {
+      if (timer === 1) {
         setIsStop(true);
       }
-    }, t);
-
+    }, 1000);
+    //intervalのクリーンアップ
     return () => {
-      //intervalのクリアアップ
       clearInterval(interval);
-      //Time outのクリアアップ
-      clearTimeout(timeOut);
     };
   }, [timer]);
 
@@ -46,7 +37,7 @@ export const Header = (): JSX.Element => {
     <header className={styles.boxHeader}>
       <h1 className={styles.boxHeaderTitle}>Booklog</h1>
       <div className={styles.boxTimer}>
-        <p className={`${styles.boxTextTimer} ${isStop && styles.red}`}>
+        <p className={isStop ? styles.redText : undefined}>
           読書タイマー {isStop ? "終了" : `残り ${textTimer}秒`}
         </p>
 
@@ -56,7 +47,7 @@ export const Header = (): JSX.Element => {
             <option value="10">10秒</option>
             <option value="15">15秒</option>
           </select>
-          <button className={styles.btnControl} onClick={handleSetTimer}>
+          <button className={styles.btnControl} onClick={handleStartTimer}>
             start
           </button>
         </div>
