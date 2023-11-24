@@ -3,28 +3,31 @@ import styles from "./Header.module.css";
 
 export const Header = (): JSX.Element => {
   const [timer, setTimer] = useState<number>(0);
-  const [isStop, setIsStop] = useState<boolean>(false);
+  const [isTimeUp, setIsTimeUp] = useState<boolean>(false);
   const ref = useRef<HTMLSelectElement>(null);
 
   //テキストに変更
   const textTimer: string = String(timer).padStart(2, "0");
 
   function handleStartTimer(): void {
-    if (ref.current?.value !== undefined && ref.current.value) {
+    if (ref.current?.value) {
       setTimer(parseInt(ref.current.value));
-      setIsStop(false);
+      setIsTimeUp(false);
     }
   }
 
   useEffect(() => {
     //intervalのセットアップ
+    console.log(isTimeUp);
+    console.log(timer);
     const interval = setInterval(() => {
-      clearInterval(interval);
-      if (timer > 1) {
+      if (timer > 0) {
         setTimer((timer) => timer - 1);
-      }
-      if (timer === 1) {
-        setIsStop(true);
+        if (timer === 1) {
+          setIsTimeUp(true);
+        }
+      } else {
+        clearInterval(interval);
       }
     }, 1000);
     //intervalのクリーンアップ
@@ -37,8 +40,12 @@ export const Header = (): JSX.Element => {
     <header className={styles.boxHeader}>
       <h1 className={styles.boxHeaderTitle}>Booklog</h1>
       <div className={styles.boxTimer}>
-        <p className={isStop ? styles.redText : undefined}>
-          読書タイマー {isStop ? "終了" : `残り ${textTimer}秒`}
+        <p
+          className={`${styles.boxTextTimer}${
+            isTimeUp ? " " + styles.redText : ""
+          }`}
+        >
+          読書タイマー {isTimeUp ? "終了" : `残り ${textTimer}秒`}
         </p>
 
         <div className={styles.boxControl}>
