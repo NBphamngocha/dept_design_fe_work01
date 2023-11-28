@@ -17,16 +17,13 @@ export const Header = (): JSX.Element => {
   }
 
   useEffect(() => {
+    if (timer <= 0) return;
     //intervalのセットアップ
-    console.log(isTimeUp);
-    console.log(timer);
     const interval = setInterval(() => {
-      if (timer > 0) {
+      if (timer - 1 > 0) {
         setTimer((timer) => timer - 1);
-        if (timer === 1) {
-          setIsTimeUp(true);
-        }
       } else {
+        setIsTimeUp(true);
         clearInterval(interval);
       }
     }, 1000);
@@ -42,12 +39,11 @@ export const Header = (): JSX.Element => {
       <div className={styles.boxTimer}>
         <p
           className={`${styles.boxTextTimer}${
-            isTimeUp ? " " + styles.redText : ""
+            isTimeUp ? ` ${styles.redText}` : ""
           }`}
         >
           読書タイマー {isTimeUp ? "終了" : `残り ${textTimer}秒`}
         </p>
-
         <div className={styles.boxControl}>
           <select className={styles.boxSelect} ref={ref}>
             <option value="5">5秒</option>
