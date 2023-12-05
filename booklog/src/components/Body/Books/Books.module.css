@@ -53,3 +53,7 @@
 .boxButton:hover {
   opacity: 0.7;
 }
+
+.boxTotalCounts {
+  padding-bottom: 15px;
+}

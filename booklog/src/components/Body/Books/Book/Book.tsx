@@ -1,4 +1,4 @@
-import type { BookItem } from "../../../types";
+import type { BookItem } from "../../../../types";
 import styles from "../Books.module.css";
 
 type Props = {
