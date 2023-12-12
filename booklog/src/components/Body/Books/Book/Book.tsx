@@ -12,7 +12,7 @@ export const Book = ({ bookInfo }: Props): JSX.Element => {
     <>
       {imageLinks && (
         <picture className={styles.boxPicture}>
-          <img src={imageLinks.thumbnail} alt="React.js&Next.js超入門第2版" />
+          <img src={imageLinks.thumbnail} alt={title} />
         </picture>
       )}
       <div className={styles.boxInfo}>
