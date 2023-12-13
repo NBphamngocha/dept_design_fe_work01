@@ -1,48 +1,23 @@
 import { useState } from "react";
+
+//type,decoder
 import type { BooksResult } from "../../types";
-import styles from "../../App.module.css";
+import { ResultDecoder } from "../../types/decoder";
+
+//component
 import { Books } from "./Books/Books";
 import { SearchBar } from "./SearchBar/SearchBar";
-import {
-  Decoder,
-  object,
-  string,
-  number,
-  array,
-  optional,
-} from "@mojotech/json-type-validation";
+
+//style
+import styles from "../../App.module.css";
 
 export const Body = (): JSX.Element => {
   const endPoint: string = `https://www.googleapis.com/books/v1/`;
-  const [bookItems, setBookItems] = useState<Result["items"]>();
-  const [total, setTotal] = useState<Result["totalItems"]>(0);
-
-  //JSON にバリデーションをかけるために、Decoderを定義する
-  const ResultDecoder: Decoder<Result> = object({
-    // id: number(),　//テスト
-    items: array(
-      object({
-        volumeInfo: object({
-          title: string(),
-          authors: optional(array(string())),
-          description: optional(string()),
-          publisher: optional(string()),
-          imageLinks: optional(
-            object({
-              smallThumbnail: string(),
-              thumbnail: string(),
-            })
-          ),
-          previewLink: optional(string()),
-        }),
-      })
-    ),
-    kind: string(),
-    totalItems: number(),
-  });
+  const [bookItems, setBookItems] = useState<BooksResult["items"]>();
+  const [total, setTotal] = useState<BooksResult["totalItems"]>(0);
 
   //非同期の処理
-  async function fetchBooksApi(query: string): Promise<BooksResult | void> {
+  async function fetchBooksApi(query: string): Promise<void> {
     try {
       const response = await fetch(
         `${endPoint}volumes?q=${encodeURIComponent(query)}&maxResults=10`

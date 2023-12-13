@@ -1,10 +1,10 @@
 import { Book } from "./Book/Book";
-import type { Result, BookItem } from "../../../types";
+import type { BooksResult, BookItem } from "../../../types";
 import styles from "./Books.module.css";
 
 type Props = {
   bookItems: BookItem[];
-  total: Result["totalItems"];
+  total: BooksResult["totalItems"];
 };
 
 export const Books = ({ bookItems, total }: Props): JSX.Element => {
@@ -16,9 +16,9 @@ export const Books = ({ bookItems, total }: Props): JSX.Element => {
         そのうち10件を表示します。
       </p>
       <ul className={styles.conBook}>
-        {bookItems.map((item, i) => {
+        {bookItems.map((item) => {
           return (
-            <li key={i} className={styles.boxBook}>
+            <li key={item.id} className={styles.boxBook}>
               <Book bookInfo={item.volumeInfo} />
             </li>
           );
