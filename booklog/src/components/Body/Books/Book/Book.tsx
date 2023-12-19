@@ -2,12 +2,12 @@ import type { BookItem } from "../../../../types";
 import styles from "../Books.module.css";
 
 type Props = {
-  bookInfo: BookItem["volumeInfo"];
+  bookInfo: BookItem;
 };
 
 export const Book = ({ bookInfo }: Props): JSX.Element => {
   const { title, authors, description, publisher, imageLinks, previewLink } =
-    bookInfo;
+    bookInfo["volumeInfo"];
   return (
     <>
       {imageLinks && (

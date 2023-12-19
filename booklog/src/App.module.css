@@ -32,11 +32,26 @@ a {
   text-decoration: none;
 }
 
-.boxWrap {
+.conWrap {
+  display: flex;
+  width: 100%;
+}
+
+.boxSideBar {
+  width: 25%;
+  background: #f0edf4;
+  border-right: 2px solid #cbc5d6;
+  padding-top: 62px;
+  height: 100vh;
+  overflow: scroll;
+  box-sizing: border-box;
+}
+
+.boxMain {
   display: flex;
   flex-direction: column;
   width: 75%;
-  margin: auto;
-  padding: 62px 3% 0;
   height: 100vh;
+  height: 100vh;
+  padding: 62px 3% 0;
 }

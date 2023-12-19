@@ -1,12 +1,14 @@
 import { useState } from "react";
 
 //type,decoder
-import type { BooksResult } from "../../types";
+import type { BookItem, BooksResult } from "../../types";
 import { ResultDecoder } from "../../types/decoder";
+import { MOCK_DATA } from "../../mockdata";
 
 //component
 import { Books } from "./Books/Books";
 import { SearchBar } from "./SearchBar/SearchBar";
+import { SideBar } from "./SideBar/SideBar";
 
 //style
 import styles from "../../App.module.css";
@@ -15,6 +17,7 @@ export const Body = (): JSX.Element => {
   const endPoint: string = `https://www.googleapis.com/books/v1/`;
   const [bookItems, setBookItems] = useState<BooksResult["items"]>();
   const [total, setTotal] = useState<BooksResult["totalItems"]>(0);
+  const myBooks: BookItem[] = MOCK_DATA.items;
 
   //非同期の処理
   async function fetchBooksApi(query: string): Promise<void> {
@@ -37,9 +40,14 @@ export const Body = (): JSX.Element => {
   }
 
   return (
-    <main className={styles.boxWrap}>
-      <SearchBar fetchBooksApi={fetchBooksApi} />
-      {bookItems ? <Books bookItems={bookItems} total={total} /> : ""}
-    </main>
+    <div className={styles.conWrap}>
+      <aside className={styles.boxSideBar}>
+        <SideBar myBooks={myBooks} />
+      </aside>
+      <main className={styles.boxMain}>
+        <SearchBar fetchBooksApi={fetchBooksApi} />
+        {bookItems && <Books bookItems={bookItems} total={total} />}
+      </main>
+    </div>
   );
 };

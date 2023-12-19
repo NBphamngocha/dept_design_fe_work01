@@ -19,7 +19,7 @@ export const Books = ({ bookItems, total }: Props): JSX.Element => {
         {bookItems.map((item) => {
           return (
             <li key={item.id} className={styles.boxBook}>
-              <Book bookInfo={item.volumeInfo} />
+              <Book bookInfo={item} />
             </li>
           );
         })}

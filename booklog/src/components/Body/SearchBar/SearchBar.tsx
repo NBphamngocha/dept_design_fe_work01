@@ -23,7 +23,7 @@ export const SearchBar = ({ fetchBooksApi }: Props): JSX.Element => {
         className={styles.boxInput}
         placeholder="キーワードを入力して書籍を検索"
       />
-      <button type="submit" className={styles.boxButton} onClick={handleSearch}>
+      <button className={styles.boxButton} onClick={handleSearch}>
         Search
       </button>
     </form>
