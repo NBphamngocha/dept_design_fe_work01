@@ -3,7 +3,6 @@ import { useState } from "react";
 //type,decoder
 import type { BookItem, BooksResult } from "../../types";
 import { ResultDecoder } from "../../types/decoder";
-import { MOCK_DATA } from "../../mockdata";
 
 //component
 import { Books } from "./Books/Books";
@@ -12,6 +11,9 @@ import { SideBar } from "./SideBar/SideBar";
 
 //style
 import styles from "../../App.module.css";
+
+//data
+import { MOCK_DATA } from "../../mockdata";
 
 export const Body = (): JSX.Element => {
   const endPoint: string = `https://www.googleapis.com/books/v1/`;

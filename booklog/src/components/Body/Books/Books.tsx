@@ -13,7 +13,7 @@ export const Books = ({ bookItems, total }: Props): JSX.Element => {
       <p className={styles.boxTotalCounts}>
         {total}件の書籍が見つかりました。
         <br />
-        そのうち10件を表示します。
+        {total >= 10 && `そのうち10件を表示します。`}
       </p>
       <ul className={styles.conBook}>
         {bookItems.map((item) => {
