@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, createContext } from "react";
 
 //type,decoder
 import type { BookItem, BooksResult } from "../../types";
@@ -12,14 +12,17 @@ import { SideBar } from "./SideBar/SideBar";
 //style
 import styles from "../../App.module.css";
 
-//data
-import { MOCK_DATA } from "../../mockdata";
-
+export const BooksContext = createContext(
+  {} as {
+    myBooks: BookItem[];
+    setMyBooks: React.Dispatch<React.SetStateAction<BookItem[]>>;
+  }
+);
 export const Body = (): JSX.Element => {
   const endPoint: string = `https://www.googleapis.com/books/v1/`;
-  const [bookItems, setBookItems] = useState<BooksResult["items"]>();
+  const [bookItems, setBookItems] = useState<BooksResult["items"]>([]);
   const [total, setTotal] = useState<BooksResult["totalItems"]>(0);
-  const myBooks: BookItem[] = MOCK_DATA.items;
+  const [myBooks, setMyBooks] = useState<BookItem[]>([]);
 
   //非同期の処理
   async function fetchBooksApi(query: string): Promise<void> {
@@ -43,13 +46,17 @@ export const Body = (): JSX.Element => {
 
   return (
     <div className={styles.conWrap}>
-      <aside className={styles.boxSideBar}>
-        <SideBar myBooks={myBooks} />
-      </aside>
-      <main className={styles.boxMain}>
-        <SearchBar fetchBooksApi={fetchBooksApi} />
-        {bookItems && <Books bookItems={bookItems} total={total} />}
-      </main>
+      <BooksContext.Provider value={{ myBooks, setMyBooks }}>
+        <aside className={styles.boxSideBar}>
+          <SideBar />
+        </aside>
+        <main className={styles.boxMain}>
+          <SearchBar fetchBooksApi={fetchBooksApi} />
+          {bookItems.length !== 0 && (
+            <Books bookItems={bookItems} total={total} />
+          )}
+        </main>
+      </BooksContext.Provider>
     </div>
   );
 };

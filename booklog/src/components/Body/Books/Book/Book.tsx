@@ -3,11 +3,14 @@ import styles from "../Books.module.css";
 
 type Props = {
   bookInfo: BookItem;
+  AddMyBooks: (id: string) => void;
 };
 
-export const Book = ({ bookInfo }: Props): JSX.Element => {
+export const Book = ({ bookInfo, AddMyBooks }: Props): JSX.Element => {
+  const { id } = bookInfo;
   const { title, authors, description, publisher, imageLinks, previewLink } =
     bookInfo["volumeInfo"];
+
   return (
     <>
       {imageLinks && (
@@ -33,6 +36,12 @@ export const Book = ({ bookInfo }: Props): JSX.Element => {
             詳しく見る
           </a>
         )}
+        <button
+          className={styles.boxButtonOrange}
+          onClick={() => AddMyBooks(id)}
+        >
+          MyBooksに追加
+        </button>
       </div>
     </>
   );

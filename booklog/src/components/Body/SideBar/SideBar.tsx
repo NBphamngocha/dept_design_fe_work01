@@ -1,14 +1,16 @@
-import type { BookItem } from "../../../types";
+import { useContext } from "react";
+import { BooksContext } from "../Body";
 import styles from "./SideBar.module.css";
 
-type Props = {
-  myBooks: BookItem[];
-};
-
-export const SideBar = ({ myBooks }: Props): JSX.Element => {
+export const SideBar = (): JSX.Element => {
+  const { myBooks, setMyBooks } = useContext(BooksContext);
+  function DeleteMyBooks(id: string) {
+    setMyBooks(myBooks.filter((item) => item.id !== id));
+  }
   return (
     <ul className={styles.wrapMyBooks}>
       {myBooks.map((item) => {
+        const { id } = item;
         const { title, authors, imageLinks, previewLink } = item.volumeInfo;
         return (
           <li className={styles.boxMyBooks} key={item.id}>
@@ -32,6 +34,12 @@ export const SideBar = ({ myBooks }: Props): JSX.Element => {
                 詳しく見る
               </a>
             )}
+            <button
+              className={styles.boxButtonOrange}
+              onClick={() => DeleteMyBooks(id)}
+            >
+              MyBooksから削除
+            </button>
           </li>
         );
       })}
