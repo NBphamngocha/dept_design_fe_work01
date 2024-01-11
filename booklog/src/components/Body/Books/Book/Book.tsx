@@ -31,17 +31,19 @@ export const Book = ({ bookInfo, AddMyBooks }: Props): JSX.Element => {
             出版社: <span>{publisher}</span>
           </p>
         )}
-        {previewLink && (
-          <a className={styles.boxButton} href={previewLink} target="_blank">
-            詳しく見る
-          </a>
-        )}
-        <button
-          className={styles.boxButtonOrange}
-          onClick={() => AddMyBooks(id)}
-        >
-          MyBooksに追加
-        </button>
+        <div className={styles.conButton}>
+          {previewLink && (
+            <a className={styles.boxButton} href={previewLink} target="_blank">
+              詳しく見る
+            </a>
+          )}
+          <button
+            className={styles.boxButtonOrange}
+            onClick={() => AddMyBooks(id)}
+          >
+            MyBooksに追加
+          </button>
+        </div>
       </div>
     </>
   );

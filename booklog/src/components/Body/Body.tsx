@@ -1,7 +1,7 @@
 import { useState, createContext } from "react";
 
 //type,decoder
-import type { BookItem, BooksResult } from "../../types";
+import type { BookItem, BooksResult, MyBooksContextType } from "../../types";
 import { ResultDecoder } from "../../types/decoder";
 
 //component
@@ -12,12 +12,7 @@ import { SideBar } from "./SideBar/SideBar";
 //style
 import styles from "../../App.module.css";
 
-export const BooksContext = createContext(
-  {} as {
-    myBooks: BookItem[];
-    setMyBooks: React.Dispatch<React.SetStateAction<BookItem[]>>;
-  }
-);
+export const BooksContext = createContext<MyBooksContextType | null>(null);
 export const Body = (): JSX.Element => {
   const endPoint: string = `https://www.googleapis.com/books/v1/`;
   const [bookItems, setBookItems] = useState<BooksResult["items"]>([]);
@@ -44,9 +39,27 @@ export const Body = (): JSX.Element => {
     }
   }
 
+  //MyBooksに本を追加
+  function AddMyBooks(id: string) {
+    const selectedBook = bookItems.find((item) => item.id === id);
+    if (selectedBook) {
+      const checkAvailable = myBooks.find((item) => item.id === id);
+      if (!checkAvailable) {
+        setMyBooks([...myBooks, selectedBook]);
+      } else {
+        alert("その本はすでにマイブックに存在します。");
+      }
+    }
+  }
+
+  //MyBooksから本を削除
+  function DeleteMyBooks(id: string) {
+    setMyBooks(myBooks.filter((item) => item.id !== id));
+  }
+
   return (
     <div className={styles.conWrap}>
-      <BooksContext.Provider value={{ myBooks, setMyBooks }}>
+      <BooksContext.Provider value={{ myBooks, AddMyBooks, DeleteMyBooks }}>
         <aside className={styles.boxSideBar}>
           <SideBar />
         </aside>

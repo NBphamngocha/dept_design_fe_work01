@@ -19,3 +19,9 @@ export type BookItem = {
     previewLink?: string;
   };
 };
+
+export type MyBooksContextType = {
+  myBooks: BookItem[];
+  AddMyBooks: (id: string) => void;
+  DeleteMyBooks: (id: string) => void;
+};

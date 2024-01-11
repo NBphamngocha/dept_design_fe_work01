@@ -36,10 +36,14 @@
   -webkit-line-clamp: 2;
 }
 
+.conButton {
+  display: flex;
+  margin-top: 10px;
+}
+
 .boxButton {
   display: inline-block;
   padding: 3px 10px;
-  margin-top: 10px;
   opacity: 1;
   border-radius: 5px;
   font-size: 14px;
