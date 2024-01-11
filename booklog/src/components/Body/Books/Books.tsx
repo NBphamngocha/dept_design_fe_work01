@@ -1,7 +1,5 @@
-import { useContext } from "react";
-import { BooksContext } from "../Body";
 import { Book } from "./Book/Book";
-import type { BooksResult, BookItem, MyBooksContextType } from "../../../types";
+import type { BooksResult, BookItem } from "../../../types";
 import styles from "./Books.module.css";
 
 type Props = {
@@ -10,8 +8,6 @@ type Props = {
 };
 
 export const Books = ({ bookItems, total }: Props): JSX.Element => {
-  const { AddMyBooks } = useContext(BooksContext) as MyBooksContextType;
-
   return (
     <>
       <p className={styles.boxTotalCounts}>
@@ -23,7 +19,7 @@ export const Books = ({ bookItems, total }: Props): JSX.Element => {
         {bookItems.map((item) => {
           return (
             <li key={item.id} className={styles.boxBook}>
-              <Book bookInfo={item} AddMyBooks={AddMyBooks} />
+              <Book bookInfo={item} />
             </li>
           );
         })}
