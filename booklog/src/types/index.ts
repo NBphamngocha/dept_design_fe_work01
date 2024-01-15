@@ -22,6 +22,6 @@ export type BookItem = {
 
 export type MyBooksContextType = {
   myBooks: BookItem[];
-  AddMyBooks: (id: string) => void;
-  DeleteMyBooks: (id: string) => void;
+  addMyBooks: (id: string) => void;
+  deleteMyBooks: (id: string) => void;
 };

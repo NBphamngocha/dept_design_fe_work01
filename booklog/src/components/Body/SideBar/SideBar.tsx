@@ -1,12 +1,9 @@
 import { useContext } from "react";
-import { BooksContext } from "../Body";
-import type { MyBooksContextType } from "../../../types";
+import { BooksContext } from "../../../context";
 import styles from "./SideBar.module.css";
 
 export const SideBar = (): JSX.Element => {
-  const { myBooks, DeleteMyBooks } = useContext(
-    BooksContext
-  ) as MyBooksContextType;
+  const { myBooks, deleteMyBooks } = useContext(BooksContext);
 
   return (
     <ul className={styles.wrapMyBooks}>
@@ -38,7 +35,7 @@ export const SideBar = (): JSX.Element => {
               )}
               <button
                 className={styles.boxButtonOrange}
-                onClick={() => DeleteMyBooks(id)}
+                onClick={() => deleteMyBooks(id)}
               >
                 MyBooksから削除
               </button>
