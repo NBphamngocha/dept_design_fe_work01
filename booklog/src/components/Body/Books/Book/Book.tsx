@@ -8,7 +8,6 @@ type Props = {
 };
 
 export const Book = ({ bookInfo }: Props): JSX.Element => {
-  const { id } = bookInfo;
   const { title, authors, description, publisher, imageLinks, previewLink } =
     bookInfo["volumeInfo"];
 
@@ -41,7 +40,7 @@ export const Book = ({ bookInfo }: Props): JSX.Element => {
           )}
           <button
             className={styles.boxButtonOrange}
-            onClick={() => addMyBooks(id)}
+            onClick={() => addMyBooks(bookInfo)}
           >
             MyBooksに追加
           </button>

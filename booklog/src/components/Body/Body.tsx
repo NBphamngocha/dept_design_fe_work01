@@ -1,16 +1,15 @@
 import { useState } from "react";
 
 //type,decoder
-import type { BookItem, BooksResult } from "../../types";
+import type { BooksResult } from "../../types";
 import { ResultDecoder } from "../../types/decoder";
-
-//context
-import { BooksContext } from "../../context";
 
 //component
 import { Books } from "./Books/Books";
 import { SearchBar } from "./SearchBar/SearchBar";
 import { SideBar } from "./SideBar/SideBar";
+
+import { BooksContextProvider } from "../../context";
 
 //style
 import styles from "../../App.module.css";
@@ -19,13 +18,14 @@ export const Body = (): JSX.Element => {
   const endPoint: string = `https://www.googleapis.com/books/v1/`;
   const [bookItems, setBookItems] = useState<BooksResult["items"]>([]);
   const [total, setTotal] = useState<BooksResult["totalItems"]>(0);
-  const [myBooks, setMyBooks] = useState<BookItem[]>([]);
 
   //非同期の処理
   async function fetchBooksApi(query: string): Promise<void> {
     try {
       const response = await fetch(
-        `${endPoint}volumes?q=${encodeURIComponent(query)}&maxResults=10`
+        `${endPoint}volumes?q=${encodeURIComponent(
+          query
+        )}&maxResults=10&key=AIzaSyCQT7Sg-xEq72wJgmK11kgu5GYF2n1HWpk`
       );
       // OK以外エラーメッセージを表示する
       if (!response.ok) {
@@ -41,25 +41,9 @@ export const Body = (): JSX.Element => {
     }
   }
 
-  //MyBooksに本を追加
-  function addMyBooks(id: string) {
-    const selectedBook = bookItems.find((item) => item.id === id);
-    if (selectedBook) {
-      const checkAvailable = myBooks.find((item) => item.id === id);
-      checkAvailable
-        ? alert("その本はすでにマイブックに存在します。")
-        : setMyBooks([...myBooks, selectedBook]);
-    }
-  }
-
-  //MyBooksから本を削除
-  function deleteMyBooks(id: string) {
-    setMyBooks(myBooks.filter((item) => item.id !== id));
-  }
-
   return (
     <div className={styles.conWrap}>
-      <BooksContext.Provider value={{ myBooks, addMyBooks, deleteMyBooks }}>
+      <BooksContextProvider>
         <aside className={styles.boxSideBar}>
           <SideBar />
         </aside>
@@ -69,7 +53,7 @@ export const Body = (): JSX.Element => {
             <Books bookItems={bookItems} total={total} />
           )}
         </main>
-      </BooksContext.Provider>
+      </BooksContextProvider>
     </div>
   );
 };
