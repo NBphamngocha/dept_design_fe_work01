@@ -5,7 +5,7 @@ type Props = {
   children: ReactNode;
 };
 
-export const defaultMyBooks = {
+const defaultMyBooks = {
   myBooks: [],
   addMyBooks: () => {},
   deleteMyBooks: () => {},
