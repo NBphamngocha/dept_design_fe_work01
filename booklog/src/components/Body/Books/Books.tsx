@@ -1,13 +1,10 @@
+import { useContext } from "react";
 import { Book } from "./Book/Book";
-import type { BooksResult, BookItem } from "../../../types";
 import styles from "./Books.module.css";
+import { BooksContext } from "../../../context";
 
-type Props = {
-  bookItems: BookItem[];
-  total: BooksResult["totalItems"];
-};
-
-export const Books = ({ bookItems, total }: Props): JSX.Element => {
+export const Books = (): JSX.Element => {
+  const { total, bookItems } = useContext(BooksContext);
   return (
     <>
       <p className={styles.boxTotalCounts}>

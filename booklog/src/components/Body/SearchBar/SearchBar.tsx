@@ -1,11 +1,9 @@
-import { useRef } from "react";
+import { useRef, useContext } from "react";
+import { BooksContext } from "../../../context";
 import styles from "./SearchBar.module.css";
 
-type Props = {
-  fetchBooksApi: (query: string) => void;
-};
-
-export const SearchBar = ({ fetchBooksApi }: Props): JSX.Element => {
+export const SearchBar = (): JSX.Element => {
+  const { fetchBooksApi } = useContext(BooksContext);
   const inputRef = useRef<HTMLInputElement>(null);
   const handleSearch = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
