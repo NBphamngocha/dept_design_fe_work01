@@ -1,7 +1,7 @@
 import { useContext } from "react";
 import { Book } from "./Book/Book";
 import styles from "./Books.module.css";
-import { BooksContext } from "../../../context";
+import { BooksContext } from "../../../context/BooksProvider";
 
 export const Books = (): JSX.Element => {
   const { total, bookItems } = useContext(BooksContext);

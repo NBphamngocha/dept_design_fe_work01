@@ -1,9 +1,10 @@
 import { useRef, useContext } from "react";
-import { BooksContext } from "../../../context";
+import { BooksContext } from "../../../context/BooksProvider";
 import styles from "./SearchBar.module.css";
 
 export const SearchBar = (): JSX.Element => {
   const { fetchBooksApi } = useContext(BooksContext);
+
   const inputRef = useRef<HTMLInputElement>(null);
   const handleSearch = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
@@ -13,6 +14,7 @@ export const SearchBar = (): JSX.Element => {
       alert("キーワード入力してください！");
     }
   };
+
   return (
     <form className={styles.boxSearchBar} action="">
       <input
