@@ -1,9 +1,14 @@
-import { useContext } from "react";
-import { MyBooksContext } from "../../../context/MyBooksProvider";
+import { useContext, useEffect } from "react";
+import { BooksContext } from "../../../context";
 import styles from "./SideBar.module.css";
 
 export const SideBar = (): JSX.Element => {
-  const { myBooks, deleteMyBooks } = useContext(MyBooksContext);
+  const { myBooks, deleteMyBooks } = useContext(BooksContext);
+
+  //myBooksのデータが更新される時、localStorageに保存する
+  useEffect(() => {
+    localStorage.setItem("books", JSON.stringify(myBooks));
+  }, [myBooks]);
 
   return (
     <aside className={styles.boxSideBar}>

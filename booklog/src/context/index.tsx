@@ -1,24 +1,30 @@
 import { useState, createContext, ReactNode } from "react";
-import type { BooksContextType, BooksResult } from "../types";
+import type { BookItem, MyBooksContextType, BooksResult } from "../types";
 import { ResultDecoder } from "../types/decoder";
+import { useLocalStorage } from "../hooks";
 
 type Props = {
   children: ReactNode;
 };
 
 //初期値設定
-const defaultBooks = {
+const defaultMyBooks = {
   total: 0,
   bookItems: [],
+  myBooks: [],
   fetchBooksApi: () => {},
+  addMyBooks: () => {},
+  deleteMyBooks: () => {},
 };
 
-export const BooksContext = createContext<BooksContextType>(defaultBooks);
+export const BooksContext = createContext<MyBooksContextType>(defaultMyBooks);
 
-export const BooksProvider = ({ children }: Props) => {
+export const BooksContextProvider = ({ children }: Props) => {
   const endPoint: string = `https://www.googleapis.com/books/v1/`;
   const [bookItems, setBookItems] = useState<BooksResult["items"]>([]);
   const [total, setTotal] = useState<BooksResult["totalItems"]>(0);
+  //useStateの代わりにカスタマイズHookを使ってkeyを指定する
+  const [myBooks, setMyBooks] = useLocalStorage("books", []);
 
   async function fetchBooksApi(query: string): Promise<void> {
     try {
@@ -41,10 +47,25 @@ export const BooksProvider = ({ children }: Props) => {
     }
   }
 
+  //MyBooksに本を追加
+  function addMyBooks(selectedBook: BookItem) {
+    myBooks.find((book) => book.id === selectedBook.id)
+      ? alert("その本はすでにマイブックに存在します。")
+      : setMyBooks([selectedBook, ...myBooks]);
+  }
+
+  //MyBooksから本を削除
+  function deleteMyBooks(id: string) {
+    setMyBooks(myBooks.filter((item) => item.id !== id));
+  }
+
   const value = {
     total,
     bookItems,
+    myBooks,
     fetchBooksApi,
+    addMyBooks,
+    deleteMyBooks,
   };
 
   return (
