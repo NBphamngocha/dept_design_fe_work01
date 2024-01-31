@@ -1,9 +1,9 @@
 import { useContext, useEffect } from "react";
-import { BooksContext } from "../../../context";
+import { MyBooksContext } from "../../../context/MyBooksProvider";
 import styles from "./SideBar.module.css";
 
 export const SideBar = (): JSX.Element => {
-  const { myBooks, deleteMyBooks } = useContext(BooksContext);
+  const { myBooks, deleteMyBooks } = useContext(MyBooksContext);
 
   //myBooksのデータが更新される時、localStorageに保存する
   useEffect(() => {

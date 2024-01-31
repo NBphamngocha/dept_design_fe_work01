@@ -1,6 +1,6 @@
 import { useContext } from "react";
 import type { BookItem } from "../../../../types";
-import { BooksContext } from "../../../../context";
+import { MyBooksContext } from "../../../../context/MyBooksProvider";
 import styles from "../Books.module.css";
 
 type Props = {
@@ -11,7 +11,7 @@ export const Book = ({ bookInfo }: Props): JSX.Element => {
   const { title, authors, description, publisher, imageLinks, previewLink } =
     bookInfo["volumeInfo"];
 
-  const { addMyBooks } = useContext(BooksContext);
+  const { addMyBooks } = useContext(MyBooksContext);
   return (
     <>
       {imageLinks && (

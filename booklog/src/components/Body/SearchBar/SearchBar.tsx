@@ -1,5 +1,5 @@
 import { useRef, useContext } from "react";
-import { BooksContext } from "../../../context";
+import { BooksContext } from "../../../context/BooksProvider";
 import styles from "./SearchBar.module.css";
 
 export const SearchBar = (): JSX.Element => {

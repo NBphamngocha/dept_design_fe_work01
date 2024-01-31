@@ -1,7 +1,7 @@
 import { useContext } from "react";
 
 //context
-import { BooksContext } from "../../context";
+import { BooksContext } from "../../context/BooksProvider";
 
 //component
 import { Books } from "./Books/Books";
