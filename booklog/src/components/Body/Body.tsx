@@ -1,7 +1,7 @@
-import { useContext } from "react";
-
 //context
-import { BooksContext } from "../../context/BooksProvider";
+import { MyBooksProvider } from "../../context/MyBooksProvider";
+//hook
+import { useSearchForm } from "../../hooks/useSearchForm";
 
 //component
 import { Books } from "./Books/Books";
@@ -12,14 +12,19 @@ import { SideBar } from "./SideBar/SideBar";
 import styles from "../../App.module.css";
 
 export const Body = (): JSX.Element => {
-  const { bookItems } = useContext(BooksContext);
+  const { bookItems, total, fetchBooksApi } = useSearchForm();
+
   return (
     <div className={styles.conWrap}>
-      <SideBar />
-      <main className={styles.boxMain}>
-        <SearchBar />
-        {bookItems.length !== 0 && <Books />}
-      </main>
+      <MyBooksProvider>
+        <SideBar />
+        <main className={styles.boxMain}>
+          <SearchBar fetchBooksApi={fetchBooksApi} />
+          {bookItems.length !== 0 && (
+            <Books total={total} bookItems={bookItems} />
+          )}
+        </main>
+      </MyBooksProvider>
     </div>
   );
 };

@@ -1,21 +1,8 @@
-import { useState, createContext, ReactNode } from "react";
-import type { BooksContextType, BooksResult } from "../types";
+import { useState } from "react";
+import type { BooksResult } from "../types";
 import { ResultDecoder } from "../types/decoder";
 
-type Props = {
-  children: ReactNode;
-};
-
-//初期値設定
-const defaultBooks = {
-  total: 0,
-  bookItems: [],
-  fetchBooksApi: () => {},
-};
-
-export const BooksContext = createContext<BooksContextType>(defaultBooks);
-
-export const BooksProvider = ({ children }: Props) => {
+export const useSearchForm = () => {
   const endPoint: string = `https://www.googleapis.com/books/v1/`;
   const [bookItems, setBookItems] = useState<BooksResult["items"]>([]);
   const [total, setTotal] = useState<BooksResult["totalItems"]>(0);
@@ -41,13 +28,5 @@ export const BooksProvider = ({ children }: Props) => {
     }
   }
 
-  const value = {
-    total,
-    bookItems,
-    fetchBooksApi,
-  };
-
-  return (
-    <BooksContext.Provider value={value}>{children}</BooksContext.Provider>
-  );
+  return { bookItems, total, fetchBooksApi };
 };

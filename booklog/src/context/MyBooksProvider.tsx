@@ -1,6 +1,6 @@
 import { createContext, ReactNode } from "react";
 import type { BookItem, MyBooksContextType } from "../types";
-import { useLocalStorage } from "../hooks";
+import { useLocalStorage } from "../hooks/useLocalStorage";
 
 type Props = {
   children: ReactNode;

@@ -25,9 +25,3 @@ export type MyBooksContextType = {
   addMyBooks: (selectedBook: BookItem) => void;
   deleteMyBooks: (id: string) => void;
 };
-
-export type BooksContextType = {
-  total: number;
-  bookItems: BooksResult["items"];
-  fetchBooksApi: (query: string) => void;
-};
