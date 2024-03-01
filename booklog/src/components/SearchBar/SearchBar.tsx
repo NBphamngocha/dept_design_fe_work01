@@ -2,30 +2,23 @@ import { useRef } from "react";
 import styles from "./SearchBar.module.css";
 
 export const SearchBar = (): JSX.Element => {
-  const searchQuery = useRef<string>("");
-  const handleOnChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
-    searchQuery.current = e.target.value;
-  };
-  const handleOnClick = (e: React.MouseEvent<HTMLButtonElement>): void => {
+  const searchRef = useRef<HTMLInputElement>(null);
+  const handleSubmit = (e: React.MouseEvent<HTMLFormElement>): void => {
     e.preventDefault();
-    searchQuery.current
-      ? alert(`${searchQuery.current} で検索しました。`)
+    searchRef.current?.value
+      ? alert(`${searchRef.current?.value} で検索しました。`)
       : alert("キーワードを入力してください！");
   };
   return (
     <div>
-      <form className={styles.boxSearchBar} action="">
+      <form className={styles.boxSearchBar} onSubmit={handleSubmit}>
         <input
           type="text"
           className={styles.boxInput}
           placeholder="キーワードを入力して書籍を検索"
-          onChange={handleOnChange}
+          ref={searchRef}
         />
-        <button
-          type="submit"
-          className={styles.boxButton}
-          onClick={handleOnClick}
-        >
+        <button type="submit" className={styles.boxButton}>
           Search
         </button>
       </form>
